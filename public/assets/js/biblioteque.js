@@ -1,22 +1,9 @@
 $(document).ready(function(){
 
+var CONFIG= {
+	server: 'http://localhost:8000/'
+}
 
-		$.fn.serializeObject = function()
-		{
-			var o = {};
-			var a = this.serializeArray();
-			$.each(a, function() {
-				if (o[this.name] !== undefined) {
-					if (!o[this.name].push) {
-						o[this.name] = [o[this.name]];
-					}
-					o[this.name].push(this.value || '');
-				} else {
-					o[this.name] = this.value || '';
-				}
-			});
-			return o;
-		};
 
 /*
 |-----------------------------------------------------------------------------
@@ -31,7 +18,7 @@ $(document).ready(function(){
 		console.log(formSerial);
 		$.ajax({
 			type: 'POST',
-			url:'books',
+			url:CONFIG.server+'books',
 			data:{
 				book:formSerial,
 				tags:tags
@@ -48,11 +35,13 @@ $(document).ready(function(){
 			}
 		});
 	});
-	/*
-	|-----------------------------------------------------------------------------
-	| VOTE TO PRINT
-	|-----------------------------------------------------------------------------
-	*/
+
+
+/*
+|-----------------------------------------------------------------------------
+| VOTE TO PRINT
+|-----------------------------------------------------------------------------
+*/
 	$(document).on('click', '.votePrintBtn', function(e){
 		e.preventDefault();
 		var self = this;
@@ -60,7 +49,7 @@ $(document).ready(function(){
 		console.log(book_id);
 		$.ajax({
 			type: 'POST',
-			url: 'books/print/'+book_id,
+			url:CONFIG.server+ 'books/print/'+book_id,
 			success:function(data){
 				console.log(data.print_votes);
 				$(self).find('.num').text(data.print_votes);
@@ -68,18 +57,24 @@ $(document).ready(function(){
 		})
 	});
 
-	/*
-	|-----------------------------------------------------------------------------
-	| SHOW HIDE PRINTER RANKING
-	|-----------------------------------------------------------------------------
-	*/
+/*
+|-----------------------------------------------------------------------------
+| SHOW HIDE PRINTER RANKING
+|-----------------------------------------------------------------------------
+*/
 	$(document).on('click', '.printerRankingBtn', function(e){
 		e.preventDefault();
 		$('.printVotesGraphBox').toggleClass('show');
 	});
 
+
+/*
+|-----------------------------------------------------------------------------
+| Gets create book form modal
+|-----------------------------------------------------------------------------
+*/
 	$.ajax({
-		url: 'createBookModal',
+		url:CONFIG.server+ 'books/createBookModal',
 		type: 'GET',
 		success:function(data){
 			$('body').append(data);
@@ -88,4 +83,47 @@ $(document).ready(function(){
 			});
 		}
 	});
+
+/*
+|-----------------------------------------------------------------------------
+| Gets print ranking widget
+|-----------------------------------------------------------------------------
+*/
+	$.ajax({
+		url:CONFIG.server+ 'books/printRankingWidget',
+		type: 'GET',
+		success:function(data){
+			$('body').append(data);
+		}
+	});
+
+
+
+
+
+/*
+|-----------------------------------------------------------------------------
+| Serialize object fn
+|-----------------------------------------------------------------------------
+*/
+	$.fn.serializeObject = function()
+	{
+		var o = {};
+		var a = this.serializeArray();
+		$.each(a, function() {
+			if (o[this.name] !== undefined) {
+				if (!o[this.name].push) {
+					o[this.name] = [o[this.name]];
+				}
+				o[this.name].push(this.value || '');
+			} else {
+				o[this.name] = this.value || '';
+			}
+		});
+		return o;
+	};
+
+
+
+
 });

@@ -17,13 +17,19 @@ class CreateBooksTable extends Migration {
 			$table->string('name');
 			$table->string('author');
 			$table->string('description');
-			$table->string('lang');
 			$table->float('rating');
+
+			$table->string('lang');
+			$table->string('cover');
 			$table->string('pdf_path');
 			$table->string('epub_path');
-			$table->string('cover');
+
+			$table->integer('is_printed')->default(0);
 			$table->integer('print_votes')->default(0);
+			$table->integer('is_bought')->default(0);
+			$table->integer('buy_votes')->default(0);
 			$table->integer('like_votes')->default(0);
+
 			$table->timestamps();
 		});
 	}

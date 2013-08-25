@@ -108,16 +108,57 @@ class BooksController extends BaseController {
 		return Response::json($book, 200);
 	}
 
+	/**
+	 * Gets book print ranking.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function get_print()
+	{
+		$books = BookRepository::printRanking();
+		return Response::json($books, 200);
+	}
 
+	/**
+	 * Gets books by tag id.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
 	public function get_byTag($id)
 	{
 		$tags  = Tag::with('books')->get()->find($id);
-		// dd($tags);
-
 		$this->layout->content = View::make('books.index', array('books'=>$tags->books));
-		// return Response::json($tags->books, 200);
-		// dd($tags);
 	}
 
+
+	/*
+	|-----------------------------------------------------------------------------
+	| MODALS AND OTHER MARKUPS
+	|-----------------------------------------------------------------------------
+	*/
+
+	/**
+	 * Return HTML markup to create a new book.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function get_createBookModal(){
+		$tags = Tag::all();
+	 	return View::make('createBookModal', array('tags'=>$tags));
+	}
+
+	/**
+	 * Return HTML markup to create a new book.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function get_printRankingWidget(){
+		$books = BookRepository::printRanking();
+		return View::make('printwidget', array('books'=>$books));
+	}
 
 }

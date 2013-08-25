@@ -4,7 +4,7 @@ class BookRepository {
 
 	public static function all()
 	{
-		return Book::orderBy('print_votes', 'DESC')->with('tags')->get()->all();
+		return Book::with('tags')->get()->all();
 	}
 
 	public static function save($bookData, $tagsData)
@@ -22,6 +22,7 @@ class BookRepository {
 		return $book;
 	}
 
+	/*Vote a book up for printing*/
 	public static function printVoteUp($id)
 	{
 
@@ -29,6 +30,11 @@ class BookRepository {
 		$book->print_votes = $book->print_votes+1;
 		$book->save();
 		return $book;
+	}
 
+	/*Gets list of books by print raking*/
+	public static function printRanking()
+	{
+		return Book::orderBy('print_votes', 'DESC')->with('tags')->get()->all();
 	}
 }
