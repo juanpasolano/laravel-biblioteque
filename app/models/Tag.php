@@ -7,7 +7,9 @@ class Tag extends Eloquent {
 
 	public function books()
 	{
-	     return $this->belongsToMany('Books', 'book_tags')
-	     							->withPivot('equipable');
+	     // return $this->belongsToMany('Book', 'book_tags')
+	     // 							->withPivot('equipable');
+	     return $this->belongsToMany('Book');
+
 	}
 }

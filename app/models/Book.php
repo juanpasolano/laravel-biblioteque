@@ -10,6 +10,7 @@ class Book extends Eloquent {
      {
 				// return $this->belongsToMany('Tag', 'book_tags')
 				// 						->withPivot('equipped');
+
      	return $this->belongsToMany('Tag');
      }
 }

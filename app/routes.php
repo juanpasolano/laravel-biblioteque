@@ -20,5 +20,11 @@ Route::get('createBookModal', function() {
  	return View::make('createBookModal', array('tags'=>$tags));
 });
 
+
+Route::get('books/byTag/{id}', 'BooksController@get_byTag');
+Route::post('books/print/{id}', 'BooksController@post_print');
 Route::resource('books', 'BooksController');
+
+
+
 Route::resource('tags', 'TagsController');

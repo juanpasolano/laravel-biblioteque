@@ -26,7 +26,7 @@
 						<br>
 						<span class="desc">{{substr($book->description, 0, 100);}}</span> <br>
 						@foreach ($book->tags as $tag)
-							<a class="label label-info" href="#{{$tag->name}}">{{$tag->name}}</a>
+							<a class="label label-info" href="{{URL::to('books/byTag/'.$tag->id)}}">{{$tag->name}}</a>
 						@endforeach
 							<hr>
 							<a class="btn btn-mini votePrintBtn" data-id="{{$book->id}}" title="Vote to get funds to print two copies of the book"><i class="icon-print"></i> <span class="num">{{$book->print_votes}}</span> votes</a>

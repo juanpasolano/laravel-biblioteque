@@ -59,8 +59,8 @@ $(document).ready(function(){
 		var book_id = $(this).data('id');
 		console.log(book_id);
 		$.ajax({
-			type: 'PUT',
-			url: 'books/'+book_id,
+			type: 'POST',
+			url: 'books/print/'+book_id,
 			success:function(data){
 				console.log(data.print_votes);
 				$(self).find('.num').text(data.print_votes);

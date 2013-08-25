@@ -11,7 +11,7 @@ class BooksController extends BaseController {
 	 */
 	public function index()
 	{
-		$books = Book::orderBy('print_votes', 'DESC')->with('tags')->get()->all();
+		$books = BookRepository::all();
 		$this->layout->content = View::make('books.index', array('books'=>$books));
 	}
 
@@ -38,20 +38,14 @@ class BooksController extends BaseController {
     	// 'author' => 'required'
     );
     $validator = Validator::make(Input::all(), $rules);
-		if ($validator->fails())
-		{
-			return Response::json($validator->messages(), 500);
+		if ($validator->fails()) return Response::json($validator->messages(), 500);
+
+		//Saving the book with repository
+		if(!$book = BookRepository::save(Input::get('book'), Input::get('tags'))) {
+			return Response::json('Something went wrong', 500);
 		}
 
-		$book = new Book;
-		$book->fill(Input::get('book'));
-		$id = $book->save();
-		// if(!RegisterService::insertTagsBook(Input::get('tags') , $book->id)) {
-		// 	return Response::json('Something went wrong', 200);
-		// }
-		foreach (Input::get('tags') as $tag) {
-				DB::table('book_tag')->insert(array('book_id'=> $book->id, 'tag_id'=>$tag));
-			}
+		//final response
 		return Response::json($book, 200);
 	}
 
@@ -85,11 +79,8 @@ class BooksController extends BaseController {
 	 */
 	public function update($id)
 	{
-		$book = Book::find($id);
-		// dd($book->print_votes+1);
-		$book->print_votes = $book->print_votes+1;
-		$book->save();
-		return Response::json($book, 200);
+		// $book = BookRepository::printVoteUp($id);
+		// return Response::json($book, 200);
 	}
 
 	/**
@@ -101,6 +92,31 @@ class BooksController extends BaseController {
 	public function destroy($id)
 	{
 		//
+	}
+
+
+
+	/**
+	 * Updets print_vote in database.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function post_print($id)
+	{
+		$book = BookRepository::printVoteUp($id);
+		return Response::json($book, 200);
+	}
+
+
+	public function get_byTag($id)
+	{
+		$tags  = Tag::with('books')->get()->find($id);
+		// dd($tags);
+
+		$this->layout->content = View::make('books.index', array('books'=>$tags->books));
+		// return Response::json($tags->books, 200);
+		// dd($tags);
 	}
 
 

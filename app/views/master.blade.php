@@ -33,7 +33,7 @@
 	@yield('content')
 
 	<footer>
-		<h3 class="pull-right">Book repository</h3>
+		<!-- <h3 class="pull-right">Book repository</h3> -->
 		<a href="#createBookModal" role="button" class="btn btn-info" data-toggle="modal">Upload new book</a>
 		<a href="#createBookModal" role="button" class="btn btn-info" data-toggle="modal">Wish list</a>
 		<a href="#" class="btn btn-info printerRankingBtn">See printer ranking</a>
