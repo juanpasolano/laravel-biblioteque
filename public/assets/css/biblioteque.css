@@ -1,0 +1,161 @@
+body {
+  font-family: 'Oxygen', serif;
+  background: #ffffff;
+}
+.booksContainer {
+  width: 100%;
+  margin-bottom: 50px;
+}
+.bookRow {
+  /* basic styling */
+
+  width: 100%;
+  height: 300px;
+  font: 14px Arial;
+  overflow: hidden;
+  /* flexbox setup */
+
+  display: -webkit-inline-box;
+  display: -moz-inline-box;
+  display: -ms-inline-flexbox;
+  display: -webkit-inline-flex;
+  display: inline-flex;
+  -webkit-box-pack: center;
+  -moz-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -moz-box-align: center;
+  -webkit-box-orient: vertical;
+  -moz-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -moz-box-direction: normal;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  vertical-align: text-top;
+}
+.bookRow > .item {
+  -webkit-flex: 1 1 auto;
+  flex: 1 1 auto;
+  height: 100%;
+  width: 30px;
+  /* To make the transition work nicely.  (Transitions to/from
+                    "width:auto" are buggy in Gecko and Webkit, at least.
+                    See http://bugzil.la/731886 for more info.) */
+
+  -webkit-transition: width 0.7s ease-out;
+  transition: width 0.7s ease-out;
+  overflow: hidden;
+  position: relative;
+}
+/* colors */
+.bookRow .item img {
+  display: block;
+  top: 20px;
+  width: 500%;
+  opacity: 0.5;
+}
+.bookRow .item .info {
+  background: white;
+  padding: 10px 30px 20px 30px;
+  display: block;
+  width: 400px;
+  bottom: 0px;
+  left: 0;
+  position: absolute;
+  font-family: 'Oxygen', serif;
+  font-size: 1.5em;
+  -webkit-transition: all 1s;
+  -webkit-transform: translate(0px, 400px);
+  -webkit-box-sizing: border-box;
+  -webkit-transition: all .4s;
+}
+.bookRow .item .info hr {
+  margin: 10px 0;
+}
+.bookRow .item .info .title {
+  font-weight: bold;
+}
+.bookRow .item .info .desc {
+  font-size: 0.7em;
+}
+.bookRow .item .info .btns {
+  display: block;
+  position: absolute;
+  top: -40px;
+}
+.bookRow .item:hover {
+  width: 150px;
+}
+.bookRow .item:hover img {
+  width: 100%;
+  opacity: 1;
+  -webkit-transform: translate(0, 0) scale(1);
+}
+.bookRow .item:hover .info {
+  -webkit-transform: translate(0, 0);
+}
+.printVotesGraphBox {
+  position: absolute;
+  width: 400px;
+  top: 0;
+  background: #ffffff;
+  z-index: 10;
+  padding: 20px;
+  color: #1a1a1a;
+  -webkit-transition: all 1s;
+  -webkit-transform: translate(-470px, 0px);
+}
+.printVotesGraphBox.show {
+  -webkit-transform: translate(0px, 0px);
+}
+.printVotesGraphBox ul {
+  padding: 0;
+  margin: 0;
+}
+.printVotesGraphBox ul li {
+  list-style: none;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #e6e6e6;
+}
+.printVotesGraphBox ul li h5 {
+  margin-bottom: 0;
+  color: #1a1a1a;
+}
+.printVotesGraphBox ul li .num {
+  padding: 3px 10px;
+  position: relative;
+}
+.printVotesGraphBox ul li .bar {
+  background: #00a8a8;
+  width: 100%;
+  height: 20px;
+  margin-top: -23px;
+}
+#createBookForm input[type="text"] {
+  width: 90%;
+}
+footer {
+  background: #ffffff;
+  display: block;
+  padding: 10px 30px;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+.btn {
+  background-image: none;
+  border-radius: 0px;
+  box-shadow: none;
+}
+.label-info,
+.badge-info {
+  font-weight: normal;
+}
+.select2-container {
+  width: 90%;
+}
