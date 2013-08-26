@@ -39,7 +39,9 @@
 		<a href="#" class="btn btn-info printerRankingBtn">See printer ranking</a>
 	</footer>
 
-
+	@section('modal')
+		@include('createBookModal', array('tags'=>$tags))
+	@show
 
 
 

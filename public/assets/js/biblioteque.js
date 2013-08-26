@@ -73,16 +73,16 @@ var CONFIG= {
 | Gets create book form modal
 |-----------------------------------------------------------------------------
 */
-	$.ajax({
-		url:CONFIG.server+ 'books/createBookModal',
-		type: 'GET',
-		success:function(data){
-			$('body').append(data);
-			$('.tagsSelect').select2({
-				tokenSeparators: [",", " "]
-			});
-		}
-	});
+	// $.ajax({
+	// 	url:CONFIG.server+ 'books/createBookModal',
+	// 	type: 'GET',
+	// 	success:function(data){
+	// 		$('body').append(data);
+	// 		$('.tagsSelect').select2({
+	// 			tokenSeparators: [",", " "]
+	// 		});
+	// 	}
+	// });
 
 /*
 |-----------------------------------------------------------------------------

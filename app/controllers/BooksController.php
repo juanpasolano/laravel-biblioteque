@@ -12,7 +12,8 @@ class BooksController extends BaseController {
 	public function index()
 	{
 		$books = BookRepository::all();
-		$this->layout->content = View::make('books.index', array('books'=>$books));
+		$tags = Tag::all();
+		return View::make('books.index', array('books'=>$books, 'tags'=>$tags));
 	}
 
 	/**
@@ -102,7 +103,7 @@ class BooksController extends BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function post_print($id)
+	public function postPrint($id)
 	{
 		$book = BookRepository::printVoteUp($id);
 		return Response::json($book, 200);
@@ -114,7 +115,7 @@ class BooksController extends BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function get_print()
+	public function getPrint()
 	{
 		$books = BookRepository::printRanking();
 		return Response::json($books, 200);
@@ -126,7 +127,7 @@ class BooksController extends BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function get_byTag($id)
+	public function getByTag($id)
 	{
 		$tags  = Tag::with('books')->get()->find($id);
 		$this->layout->content = View::make('books.index', array('books'=>$tags->books));
@@ -145,7 +146,7 @@ class BooksController extends BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function get_createBookModal(){
+	public function getCreateBookModal(){
 		$tags = Tag::all();
 	 	return View::make('createBookModal', array('tags'=>$tags));
 	}
@@ -156,7 +157,7 @@ class BooksController extends BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function get_printRankingWidget(){
+	public function getPrintRankingWidget(){
 		$books = BookRepository::printRanking();
 		return View::make('printwidget', array('books'=>$books));
 	}

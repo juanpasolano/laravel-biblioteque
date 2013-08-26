@@ -1,3 +1,4 @@
+@extends('master')
 @section('content')
 	<div class="booksContainer">
 		<?php $c=1; ?>
@@ -25,8 +26,6 @@
 			<?php $c++; ?>
 			<?php if($c > 4) { $c=1; ?></div><?php } ?>
 		@endforeach
-
 	</div>
-
-
-@endsection
+	</div>
+@stop

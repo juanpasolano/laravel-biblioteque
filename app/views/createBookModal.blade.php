@@ -1,5 +1,4 @@
 	<div id="createBookModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="createBookModalLabel" aria-hidden="true">
-
 	  <form method="POST" action="http://localhost:8000/books" accept-charset="UTF-8" class="form-horizontal" id="createBookForm">
 
 	  <div class="modal-header">
